@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\StudentController;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 // Ini ketika user masuk ke link dari serve maka kan menampilkan view welcome
 Route::get('/', function () {
-    return view('content');
+    return view('content',[
+        'nama' => 'Alif ',
+        'role' => '0990098',
+        'items' => ['Mangga', 'Durian', 'Jeruk']
+    ]);
 });
+
+Route::get('/Student',[StudentController::class,'index']);
+
+Route::get('/Service',[ServiceController::class,'index']);
+
+
 
 // // Ketika user jalankan maka akan muncul 'Hello, welcome to Laravel!'
 // Route::get('/welcome', function () {
