@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -28,6 +29,8 @@ Route::get('/', function () {
 Route::get('/Student',[StudentController::class,'index']);
 
 Route::get('/Service',[ServiceController::class,'index']);
+
+Route::get('/Book',[BookController::class,'index']);
 
 
 
