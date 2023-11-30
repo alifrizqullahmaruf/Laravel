@@ -13,15 +13,15 @@ class BookController extends Controller
     public function index()
     {
         $book_data = Book::all();
-        return view('Book', compact('book_data'));
-    }
+        return view('book.index', compact('book_data'));
+    }   
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('book.create');
     }
 
     /**
@@ -29,7 +29,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book;
+        $book -> judul = $request->judul;
+        $book -> penulis = $request->penulis;
+        $book -> harga = $request->harga;
+        $book -> tgl_terbit = $request->tgl_terbit;
+        $book->save();
+        return redirect('/Book');
     }
 
     /**
@@ -61,6 +67,8 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book-> delete();
+        return redirect('/Book');
     }
 }

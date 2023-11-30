@@ -17,6 +17,7 @@
                     <th>penulis</th>
                     <th>Harga</th>
                     <th>Tgl. Terbit</th>
+                    <th>Aksi</th>
                     </tr>
             </thead>
             <tbody>
@@ -33,10 +34,25 @@
                                 {{ $data->tgl_terbit }}
                             @endif
                         </td>
-                        
+                        <td>
+                            <form action="{{ route('Book.destroy', $data->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="return confirm('Yakin mau hapus?')" type="submit" class="btn btn-danger" >Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
+        <div class="button">
+            <a href="{{ route('Book.create') }}">
+                <button type="button" class="btn btn-primary" >Add Book</button>
+            </a>
+        </div>
+
+            
+    
     </div>
 @endsection

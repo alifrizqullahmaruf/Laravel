@@ -31,6 +31,9 @@ Route::get('/Student',[StudentController::class,'index']);
 Route::get('/Service',[ServiceController::class,'index']);
 
 Route::get('/Book',[BookController::class,'index']);
+Route::get('/Book/create',[BookController::class,'create'])->name('Book.create');
+Route::post('/Book',[BookController::class,'store'])->name('Book.store');
+Route::delete('/Book/delete/{id}', [BookController::class, 'destroy'])->name('Book.destroy');
 
 
 
