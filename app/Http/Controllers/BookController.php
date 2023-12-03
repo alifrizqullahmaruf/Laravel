@@ -49,19 +49,38 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
+    // Membuat fungsi edit unutk edit data
     public function edit(string $id)
     {
-        //
+        // mengambil data dari model Book sesuai dengan id yang diminta
+        $book_data = Book::findOrFail($id);
+        
+        // Menampilkan page edit 
+        return view('book.edit', compact('book_data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
+
+    // Membuat fungsi update yang di gunnakan unutk menyimpan perubahan yang ada
     public function update(Request $request, string $id)
     {
-        //
-    }
+        // mengambil data dari model Book sesuai dengan id yang ada
+        $book = Book::findOrFail($id);
 
+        // mengambil data yang ada di database
+        $book->judul = $request->judul?? $book->judul;
+        $book->penulis = $request->penulis?? $book->penulis;
+        $book->harga = $request->harga?? $book->harga;
+        $book->tgl_terbit = $request->tgl_terbit?? $book->tgl_terbit;
+        
+        // Menyimpan perubahan 
+        $book->update();
+
+        return redirect("/Book");
+    }
     /**
      * Remove the specified resource from storage.
      */

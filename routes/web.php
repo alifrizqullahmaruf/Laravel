@@ -34,6 +34,10 @@ Route::get('/Book',[BookController::class,'index']);
 Route::get('/Book/create',[BookController::class,'create'])->name('Book.create');
 Route::post('/Book',[BookController::class,'store'])->name('Book.store');
 Route::delete('/Book/delete/{id}', [BookController::class, 'destroy'])->name('Book.destroy');
+// route untuk mengedit data
+Route::get('/Book/edit/{id}', [BookController::class, 'edit'])->name('Book.edit');
+// route unutk menyimpan perubahan data
+Route::post('/Book/update/{id}', [BookController::class, 'update'])->name('Book.update');
 
 
 

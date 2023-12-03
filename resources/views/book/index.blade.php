@@ -5,9 +5,9 @@
 @section('konten')
     <div class="container">
         <br>
-        <h1>Halaman Books</h1>
+        <h1 class="text-center">Halaman Books</h1>
         <hr>
-        <h2>Tabel data buku</h2>
+        <h2 class="mt-5">Tabel data buku</h2>
         <br>
         <table class="table table-striped">
             <thead>
@@ -17,7 +17,8 @@
                     <th>penulis</th>
                     <th>Harga</th>
                     <th>Tgl. Terbit</th>
-                    <th>Aksi</th>
+                    <th>Hapus</th>
+                    <th>Modifikasi</th>
                     </tr>
             </thead>
             <tbody>
@@ -41,12 +42,19 @@
                                 <button onclick="return confirm('Yakin mau hapus?')" type="submit" class="btn btn-danger" >Delete</button>
                             </form>
                         </td>
+                        <td>
+                            {{-- Membuat button unutk pergi ke page edit --}}
+                            <form action="{{ route('Book.edit', $data->id) }}" method="GET">
+                                @csrf
+                                <button class="btn btn-warning" >Edit data</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <div class="button">
+        <div class="button mt-5">
             <a href="{{ route('Book.create') }}">
                 <button type="button" class="btn btn-primary" >Add Book</button>
             </a>
