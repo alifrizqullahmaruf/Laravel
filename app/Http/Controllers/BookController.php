@@ -12,8 +12,20 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book_data = Book::all();
-        return view('book.index', compact('book_data'));
+        $batas = 5;
+        $jumlah_buku = Book::count();
+        $book_data = Book::orderBy('id','desc')->simplePaginate($batas);
+        $no = $batas * ($book_data->currentPage() - 1) + 1;        
+        return view('book.index', compact('book_data','no','jumlah_buku'));
+    }   
+    public function search(Request $request)
+    {
+        $batas = 5;
+        $cari = $request->kata;
+        $book_data = Book::where('judul','like',"%".$cari."%")->orwhere('penulis','like',);
+        $book_data = Book::orderBy('id','desc')->simplePaginate($batas);
+        $no = $batas * ($book_data->currentPage() - 1) + 1;        
+        return view('book.index', compact('book_data','no','jumlah_buku'));
     }   
 
     /**
@@ -28,14 +40,20 @@ class BookController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
+        $this->validate($request,[
+            'judul' => 'required|string',
+            'penulis' => 'required|string|max:30',
+            'harga' => 'required|numeric',
+            'tgl_terbit' => 'required|date'
+        ]);
         $book = new Book;
         $book -> judul = $request->judul;
         $book -> penulis = $request->penulis;
         $book -> harga = $request->harga;
         $book -> tgl_terbit = $request->tgl_terbit;
         $book->save();
-        return redirect('/Book');
+        return redirect('/Book')->with('AddMassage','Data berhasil di tambahkan');
     }
 
     /**
@@ -79,7 +97,7 @@ class BookController extends Controller
         // Menyimpan perubahan 
         $book->update();
 
-        return redirect("/Book");
+        return redirect("/Book")->with('UpdateMassage','Data berhasil diUpdate');
     }
     /**
      * Remove the specified resource from storage.
@@ -88,6 +106,6 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($id);
         $book-> delete();
-        return redirect('/Book');
+        return redirect('/Book')->with('DeleteMassage','Data berhasil Dihapus');
     }
 }

@@ -28,6 +28,13 @@
             </div>
 
             <button style="margin-top: 30px" type="submit" class="btn btn-primary">Tambah Buku</button>
+            @if(count($errors)>0)
+                <ul class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
         </form>
         <a href="/Book">
             <button style="margin-top: 50px" type="button" class="btn" >

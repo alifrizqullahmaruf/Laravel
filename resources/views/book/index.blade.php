@@ -7,6 +7,8 @@
         <br>
         <h1 class="text-center">Halaman Books</h1>
         <hr>
+        
+
         <h2 class="mt-5">Tabel data buku</h2>
         <br>
         <table class="table table-striped">
@@ -53,6 +55,20 @@
                 @endforeach
             </tbody>
         </table>
+        <div>{{ $book_data->links() }}</div>
+        <div><strong>Jumlah Buku:{{ $jumlah_buku }}</strong></div>
+        {{-- Menambahkan pesan bahwa data berhasil di tambahkan --}}
+        @if (Session::has('AddMassage'))
+            <div class="alert alert-success" id="Add" style="animation: fadeInOut 3s; animation-fill-mode: forwards;">{{ Session::get('AddMassage') }}</div>
+            <script>setTimeout(function() { document.getElementById('Add').style.display = 'none'; }, 3000);</script>
+            
+        @elseif(Session::has('UpdateMassage'))
+            <div class="alert alert-warning" id="update" style="animation: fadeInOut 3s; animation-fill-mode: forwards;">{{ Session::get('UpdateMassage') }}</div>
+            <script>setTimeout(function(){ document.getElementById('update').style.display="none";}, 3000);</script>
+        @elseif(Session::has('DeleteMassage'))
+            <div class="alert alert-danger" id="delete" style="animation: fadeInOut 3s; animation-fill-mode: forwards;">{{ Session::get('DeleteMassage') }}</div>
+            <script>setTimeout(function() {document.getElementById('delete').style.display='none'},3000)</script>
+        @endif
 
         <div class="button mt-5">
             <a href="{{ route('Book.create') }}">
@@ -63,4 +79,5 @@
             
     
     </div>
+    
 @endsection

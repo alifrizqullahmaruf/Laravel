@@ -39,6 +39,8 @@ Route::get('/Book/edit/{id}', [BookController::class, 'edit'])->name('Book.edit'
 // route unutk menyimpan perubahan data
 Route::post('/Book/update/{id}', [BookController::class, 'update'])->name('Book.update');
 
+Route::get('/Book/search',[BookController::class, 'search'])->name('Book.search');
+
 
 
 // // Ketika user jalankan maka akan muncul 'Hello, welcome to Laravel!'
